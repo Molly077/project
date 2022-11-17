@@ -12,6 +12,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 axios.defaults.baseURL = 'https://lianghj.top:8888/api/private/v1/'
+axios.interceptors.request.use(config => {
+  console.log(config)
+  // 在最后必须return config
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
 
 new Vue({
   router,
